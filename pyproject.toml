@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcpguard"
+version = "0.1.0"
+description = "Security and policy middleware for Model Context Protocol servers"
+authors = [{name = "MCP Guard Team", email = "security@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["mcp", "security", "middleware", "policy"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Topic :: Security"
+]
+dependencies = [
+    "pydantic>=2",
+    "pyyaml",
+    "uvicorn",
+    "websockets",
+    "fastapi",
+    "redis>=4.0; extra == \"redis\""
+]
+
+[project.optional-dependencies]
+redis = ["redis>=4.0"]
+dev = ["pytest", "pytest-asyncio", "httpx", "anyio", "ruff", "mypy"]
+
+[project.urls]
+Homepage = "https://example.com/mcpguard"
+Repository = "https://example.com/mcpguard/repo"
+
+[project.scripts]
+mcpguard = "mcpguard.proxy:cli_main"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-q"
+asyncio_mode = "auto"
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["mcpguard"]
+
+[tool.ruff]
+line-length = 100
+
