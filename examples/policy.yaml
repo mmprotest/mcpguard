@@ -1,0 +1,36 @@
+version: 1
+auth:
+  mode: none
+  allowed_keys: []
+  allowed_tokens: []
+tools:
+  allow:
+    - "calculator/*"
+  deny:
+    - "admin/*"
+resources:
+  allow:
+    - "file://**/*.md"
+    - "http://docs.example.com/**"
+  deny:
+    - "file://**/.env"
+    - "s3://secret/**"
+prompts:
+  deny_regex:
+    - "(?i)ignore.*instructions"
+    - "(?i)exfiltrate"
+    - "(?i)passwords?"
+  max_length: 4000
+rate_limit:
+  capacity: 5
+  refill_rate_per_sec: 1.0
+  backend: memory
+  redis_dsn: null
+logging:
+  level: INFO
+  output: stderr
+  file_path: mcpguard.log
+  rotate_bytes: 10485760
+attestation:
+  enabled: true
+  alg: sha256
